@@ -1,0 +1,75 @@
+/* Navigation Styles */
+
+/*For some reason that I don't know, the nav and .Logo styles are affecting the header, 
+even though the slide.css should not be related to the header. I still don't know how to solve it. */
+
+/* Apply styles to nav and .Logo within the header */
+header nav {
+  align-self: center;
+  justify-self: end;
+  /* Your styles for nav within header go here */
+}
+
+header .Logo {
+  justify-self: start;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 10px;
+  /* Your styles for .Logo within header go here */
+}
+
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+ nav {
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    align-self: center; /* Align nav to the center vertically */
+    justify-self: center; /* Align nav to the center horizontally */
+  }
+
+}
+
+/* Presentation Section Styles */
+.presentation {
+  position: relative;
+  /* Use background-image for the slide */
+}
+
+.text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 30px;
+  /* Style the text container within the presentation */
+}
+
+.slide {
+  max-width: 100%;
+  height: auto;
+  /* Style the images within the presentation */
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  .presentation {
+    background-image: url('../../multimedia/slide0.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Set the background image for mobile */
+  }
+
+  .text-container {
+    position: static;
+    transform: none;
+    margin-top: 20px;
+    text-align: center;
+    /* Adjust text container for mobile */
+  }
+}

@@ -1,0 +1,103 @@
+/* Reset styles and set font-family */
+* {
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Body styles */
+body {
+  display: grid;
+  margin: 0;
+  background-color: rgb(217, 217, 217);
+}
+
+/* Header styles */
+header {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Adjusted grid-template-columns */
+  grid-template-rows: 100px;
+  background-color: #000000;
+  max-height: 100px;
+}
+
+
+/* Navigation styles */
+nav {
+  justify-self: start; /* Align the logo to the left */
+  display: grid;
+  grid-template-columns: auto auto; /* Adjusted grid-template-columns */
+  align-items: center; /* Vertically center the logo and title */
+}
+
+/* Logo styles */
+.Logo {
+  justify-self: start; /* Align the logo to the left */
+  display: grid;
+  grid-template-columns: auto auto; /* Adjusted grid-template-columns */
+  align-items: center; /* Vertically center the logo and title */
+  gap: 10px; /* Add some gap between the logo and title */
+}
+
+/* Title (Hackio) styles */
+a.hackio {
+  font-size: 2vw;
+  margin: 0; /* Remove the margin to align the title with the logo */
+  /* Consider using pixels or rems for better consistency */
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  a.hackio {
+    font-size: 0px; /* Adjust the font size for mobile devices */
+  }
+
+  header {
+    display: grid; /* Use grid layout for mobile */
+    grid-template-columns: 1fr 1fr; /* Change to a single column layout for mobile */
+    grid-template-rows: auto; /* Adjust grid-template-rows for mobile */
+    justify-items: center; /* Center the content horizontally within the grid */
+  }
+
+  nav {
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    align-self: center; /* Align the nav to the center vertically */
+    justify-self: center; /* Align the nav to the center horizontally */
+  }
+
+  img.carrito {
+    padding-left: 1rem;
+  }
+
+  .Logo {
+    grid-row: 1; /* Place the logo in the first row of the grid */
+    justify-self: center; /* Align the logo to the center for mobile */
+  }
+}
+
+/* Fine-tune the position of the title "HACKIO," align to the center of the header row */
+
+/* Link styles */
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* Hover styles for navigation links */
+nav a:hover {
+  color: #838383;
+}
+
+/* Image styles */
+.logoImg {
+  height: 90px;
+  margin-right: 10px;
+}
+
+/* Styles for the shopping cart image */
+img.carrito {
+  max-height: 35px;
+  padding: 0.5rem;
+  padding-right: 2rem;
+}

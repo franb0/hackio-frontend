@@ -1,0 +1,42 @@
+/* Base Styles */
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  background-color: rgb(217, 217, 217);
+  padding: 20px;
+}
+
+.products {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  text-align: center;
+}
+
+.products img {
+  width: auto;
+  max-height: 20vh; /* Set the max height to 20% of the viewport height */
+  object-fit: cover; /* Preserve the aspect ratio and cover the container */
+  border-radius: 10px;
+}
+
+.products h3 {
+  margin: 10px 0;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+  .catalogo {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust grid layout for mobile devices */
+    gap: 10px; /* Add some space between grid items */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Media query for computer screens */
+@media screen and (min-width: 768px) {
+  .catalogo {
+    grid-template-columns: repeat(4, 1fr); /* Adjusted number of columns for larger screens */
+    gap: 20px; /* Add some space between grid items */
+  }
+}

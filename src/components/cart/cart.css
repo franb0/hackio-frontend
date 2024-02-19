@@ -1,0 +1,40 @@
+/* Estilos generales */
+.cart-section {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    width: 300px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para la lista de elementos del carrito */
+.cart-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-section li {
+    margin: 10px 0;
+}
+
+/* Estilos para los botones */
+.cart-section button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.cart-section button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el encabezado */
+.cart-section h2 {
+    margin-bottom: 10px;
+}
