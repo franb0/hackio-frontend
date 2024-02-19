@@ -3,6 +3,7 @@ import './header.css';
 import image from "../../multimedia/image.png";
 import cart from "../../multimedia/cart.png";
 import LoginModal from '../LoginModal/LoginModal'; 
+import { Link } from 'react-router-dom'; // Importa el componente Link
 
 export default function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -29,7 +30,10 @@ export default function Header() {
     <div>
       <header>
         <div className="Logo">
-          <img src={image} alt="logo tienda" className="logoImg" />
+          {/* Enlace para redirigir al inicio */}
+          <Link to="/">
+            <img src={image} alt="logo tienda" className="logoImg" />
+          </Link>
           <span className="hackio">Hackio</span>
         </div>
         <nav>
@@ -38,7 +42,10 @@ export default function Header() {
           ) : (
             <button onClick={openLoginModal}>Login</button>
           )}
-          <img src={cart} alt="Carrito" className="carrito" />
+          {/* Enlace para redirigir al carrito */}
+          <Link to="/cart" className="cart-link">
+            <img src={cart} alt="Carrito" className="carrito" />
+          </Link>
         </nav>
       </header>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './LoginModal.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; 
 
 export default function LoginModal({ onClose, onLogin }) {
   const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ export default function LoginModal({ onClose, onLogin }) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
+      <span className="close" onClick={onClose} style={{fontSize: "40px", color: "red"}}>&times;</span>
         <div className="login-box">
           <form onSubmit={handleSubmit}>
             <div className="imgcontainer">
@@ -63,7 +64,10 @@ export default function LoginModal({ onClose, onLogin }) {
                 onChange={handleChange}
                 required
               />
-
+              {/* Botón para redirigir al usuario a la página de registro */}
+              <Link to="/register">
+                <button type="button">Register</button>
+              </Link>
               <button type="submit">Login</button>
               <span className="error">{error}</span>
             </div>
