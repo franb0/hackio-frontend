@@ -1,57 +1,54 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState } from 'react';
 import './header.css';
 import image from "../../multimedia/image.png";
 import cart from "../../multimedia/cart.png";
-import { Link } from "react-router-dom";
-import LoginModal from '../LoginModal/LoginModal'; // Check the file path
-import axios from 'axios';
+import LoginModal from '../LoginModal/LoginModal'; 
 
 export default function Header() {
-  // Create state to manage the login modal
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Function to open the login modal
   const openLoginModal = () => {
     setShowLoginModal(true);
   };
 
-  // Function to close the login modal
   const closeLoginModal = () => {
     setShowLoginModal(false);
+  };
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setShowLoginModal(false); 
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
   };
 
   return (
     <div>
       <header>
         <div className="Logo">
-          <Link to="/">
-            <img src={image} alt="logo tienda" className="logoImg" />
-          </Link>
-          <Link to="/" className="hackio">
-            Hackio
-          </Link>
+          <img src={image} alt="logo tienda" className="logoImg" />
+          <span className="hackio">Hackio</span>
         </div>
         <nav>
-          {/* Use onClick to open the login modal */}
-          <Link to="/" className="Nav-Link" onClick={openLoginModal}>
-            Login
-          </Link>
-          <Link to="/cart">
-            <img src={cart} alt="Carrito" className="carrito" />
-          </Link>
+          {isLoggedIn ? (
+            <button onClick={handleLogout}>Logout</button>
+          ) : (
+            <button onClick={openLoginModal}>Login</button>
+          )}
+          <img src={cart} alt="Carrito" className="carrito" />
         </nav>
       </header>
 
-      {/* Render the login modal as an overlay */}
       {showLoginModal && (
-  <div className="modal">
-    <div className="modal-content">
-      {/* The LoginModal component content goes here */}
-      <LoginModal onClose={closeLoginModal} />
-    </div>
-  </div>
-)}
-
+        <div className="modal">
+          <div className="modal-content">
+            <LoginModal onClose={closeLoginModal} onLogin={handleLogin} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

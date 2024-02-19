@@ -1,84 +1,75 @@
 import React, { useState } from 'react';
 import './LoginModal.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default function LoginModal({ onClose }) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+export default function LoginModal({ onClose, onLogin }) {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
 
-    const handleCancelClick = () => {
-        onClose(); // Close the modal when Cancel is clicked
-    };
+  const [error, setError] = useState('');
 
-    const handleSubmit = async (event) => {
-        event.preventDefault(); // Prevent the form from submitting normally
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-        try {
-            // Send a POST request to the backend with the login credentials
-            const response = await axios.post("http://localhost:8080/login", {
-                username: username,
-                password: password
-            });
-            // Check the response from the backend
-            if (response.data.success) {
-                // If login is successful, close the modal
-                onClose();
-            } else {
-                // If login fails, display the error message from the backend
-                setErrorMessage(response.data.error);
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            // Handle any errors that occur during the login process
-            setErrorMessage("An error occurred. Please try again later.");
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    return (
-        <div className="modal">
-            <div className="modal-content">
-                <span className="close" onClick={onClose}>&times;</span>
-                <div className="login-box">
-                    <form onSubmit={handleSubmit}>
-                        <div className="imgcontainer">
-                            <img src="img_avatar2.png" alt="Avatar" className="avatar" />
-                        </div>
+    try {
+      const response = await axios.post("http://localhost:8080/login", formData);
+      // Verificar si el inicio de sesión fue exitoso
+      if (response.data.success) {
+        onLogin(); // Llamar a la función onLogin proporcionada desde el componente padre
+        onClose(); // Cerrar el modal
+      } else {
+        setError(response.data.message); // Mostrar el mensaje de error si no fue exitoso
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError("Error during login. Please try again."); // Manejar errores de red u otros errores
+    }
+  };
 
-                        <div className="container">
-                            <label htmlFor="uname"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="uname" required
-                                value={username} onChange={(e) => setUsername(e.target.value)} />
-
-                            <label htmlFor="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required
-                                value={password} onChange={(e) => setPassword(e.target.value)} />
-
-                            <button type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked={true} name="remember" /> Remember me
-                            </label>
-                        </div>
-
-                        <div className="container" style={{ backgroundColor: "#3b3b3b" }}>
-                            <button type="button" className="cancelbtn" onClick={handleCancelClick}>
-                                Cancel
-                            </button>
-                            <span className="psw">
-                                <Link to="/register">Create an Account</Link>
-                            </span>
-                            <span className="psw">
-                                <button onClick={() => { /* Handle Forgot Password action here */ }}>
-                                    Forgot password?
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <span className="close" onClick={onClose}>&times;</span>
+        <div className="login-box">
+          <form onSubmit={handleSubmit}>
+            <div className="imgcontainer">
+              <img src="img_avatar2.png" alt="Avatar" className="avatar" />
             </div>
-            {/* Display the error message if login fails */}
-            {errorMessage && <div className="login-message error">{errorMessage}</div>}
+
+            <div className="container">
+              <label htmlFor="username"><b>Username</b></label>
+              <input
+                type="text"
+                placeholder="Enter Username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+
+              <label htmlFor="password"><b>Password</b></label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+
+              <button type="submit">Login</button>
+              <span className="error">{error}</span>
+            </div>
+          </form>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
