@@ -56,29 +56,7 @@ function App() {
 
           </Route>
 
-          <Route path='/hotplug' element={<>
-            <Header />
-            <Footer />
-          </>}>
-          </Route>
-
-          <Route path='/wireless' element={<>
-            <Header />
-            <Footer />
-          </>}>
-          </Route>
-
-          <Route path='/micropc' element={<>
-            <Header />
-            <Footer />
-          </>}>
-          </Route>
-
-          <Route path='/courses' element={<>
-            <Header />
-            <Footer />
-          </>}>
-          </Route>
+          
 
         </Routes>
       </Router>
