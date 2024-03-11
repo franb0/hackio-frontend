@@ -3,6 +3,7 @@ import Header from './components/header/header';
 import Cart from "./components/cart/cart";
 import Register from "./components/register/register";
 import Footer from "./components/footer/footer";
+import PrimarySearchAppBar from "./components/searchBar/searchBar"
 // import Login from "./components/login/login";
 import Slide from "./components/slide/slide";
 import Products from "./components/products/products";
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path='/' element={<>
             <Header />
+            <PrimarySearchAppBar />
             <Slide />
             <Products />
             <Footer />
