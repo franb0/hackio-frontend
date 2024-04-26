@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auto-complete</title>
+
+  <!-- Import TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+</head>
+<body class="">
+  <div class="container p-0">
+    <div class="container p-0" >
+      <header >
+        <nav class="navbar navbar-dark bg-dark rounded">
+          <a class="navbar-brand">
+            <strong>Auto-complete</strong>
+          </a>
+        </nav>
+      </header>
+    </div>
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Input Text</label>
+          <input class="form-control" type="input" id="pred_features" pattern="^[a-z]*$">
+        </div>
+        <div class="col">
+          <label class="form-label">Predicted Text</label>
+          <input class="form-control" type="input" id="pred_labels" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- main script file -->
+<script>
     // Define the alphabet length
     const ALPHA_LEN = 26;
     // Maximum length of input text
@@ -8,7 +43,7 @@
     // Function to set up the page and load the model
     function setup() {
       // Load the pre-trained model
-      tf.loadLayersModel('autocorrect_model.json').then(loadedModel => {
+      tf.loadLayersModel('C:\Users\Francesco\Desktop\hackio-frontend\src\ai\autocorrect_model.json').then(loadedModel => {
         model = loadedModel;
       });
 
@@ -43,3 +78,6 @@
     // Define preprocessing and postprocessing functions here
 
     setup();
+</script>
+
+</html>
