@@ -30,6 +30,44 @@
       </div>
     </div>
   </div>
+<!-- Code injected by live-server -->
+<script>
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+        (function () {
+            function refreshCSS() {
+                var sheets = [].slice.call(document.getElementsByTagName("link"));
+                var head = document.getElementsByTagName("head")[0];
+                for (var i = 0; i < sheets.length; ++i) {
+                    var elem = sheets[i];
+                    var parent = elem.parentElement || head;
+                    parent.removeChild(elem);
+                    var rel = elem.rel;
+                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                    }
+                    parent.appendChild(elem);
+                }
+            }
+            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+            var address = protocol + window.location.host + window.location.pathname + '/ws';
+            var socket = new WebSocket(address);
+            socket.onmessage = function (msg) {
+                if (msg.data == 'reload') window.location.reload();
+                else if (msg.data == 'refreshcss') refreshCSS();
+            };
+            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                console.log('Live reload enabled.');
+                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+            }
+        })();
+    }
+    else {
+        console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
+    // ]]>
+</script>
 </body>
 <!-- main script file -->
 <script>
@@ -43,18 +81,26 @@
     // Function to set up the page and load the model
     function setup() {
       // Load the pre-trained model
-      tf.loadLayersModel('C:\Users\Francesco\Desktop\hackio-frontend\src\ai\autocorrect_model.json').then(loadedModel => {
+      tf.loadLayersModel('autocorrect_model.json').then(loadedModel => {
         model = loadedModel;
+        console.log("Model loaded successfully."); // Log success message
+      }).catch(error => {
+        console.error("Error loading model:", error); // Log error if model loading fails
       });
 
       // Event listener for input text
       document.getElementById('pred_features').addEventListener('keyup', () => {
+        console.log("Key up event triggered."); // Log event trigger
         let pred_features = document.getElementById('pred_features').value;
+        console.log("Input value:", pred_features); // Log input value
         // Only predict if input is valid
         if (pred_features.length < max_len && /^[a-z]{1,10}$/.test(pred_features)) {
+          console.log("Input is valid. Predicting completion..."); // Log prediction
           let pred_labels = predictCompletion(pred_features);
+          console.log("Predicted labels:", pred_labels); // Log predicted labels
           document.getElementById('pred_labels').value = pred_labels.join("");
         } else {
+          console.log("Input is invalid."); // Log invalid input
           // Clear predicted text if input is invalid
           document.getElementById('pred_labels').value = "";
         }
